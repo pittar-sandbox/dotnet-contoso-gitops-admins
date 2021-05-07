@@ -3,11 +3,9 @@ kind: Kustomization
 
 namespace: sealed-secrets
 
-bases:
-  - ../../02-rbac/openshift-gitops
-
 resources:
   - namespace.yaml
+  - openshift-gitops-argocd-admin-rolebinding.yaml
   - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
 
 patchesJson6902:
@@ -17,3 +15,9 @@ patchesJson6902:
       kind: Deployment
       name: sealed-secrets-controller
     path: patch-sealed-secrets.yaml
+  - target:
+      group: rbac.authorization.k8s.io
+      version: v1
+      kind: RoleBinding
+      name: cluster-argocd-application-controller-admin
+    path: openshift-gitops-argocd-admin-rolebinding-patch.yaml
