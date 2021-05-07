@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: Contoso CI/CD
+    openshift.io/display-name: Contoso CI/CD
+  name: contoso-cicd

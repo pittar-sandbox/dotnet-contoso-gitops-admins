@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: Contoso DEV
+    openshift.io/display-name: Contoso DEV
+  name: contoso-dev

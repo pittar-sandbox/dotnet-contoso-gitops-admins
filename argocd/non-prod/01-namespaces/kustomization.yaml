@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: openshift-gitops
+
+resources:
+  # Main namespaces project.
+  - namespaces-project.yaml
+  # Argo CD Namespaces
+  - openshift-gitops-app.yaml
+  - argocd-app.yaml
+  # Tooling Namespaces
+  - cicd-tools-app.yaml
+  - sealed-secrets-app.yaml
+  # Pet Clinic Namespaces
+  - contoso-cicd-app.yaml
+  - contoso-dev-app.yaml
+  - contoso-test-app.yaml
