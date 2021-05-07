@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: namespaces
   source:
-    path: overlays/non-prod/01-namespaces/argocd
+    path: overlays/prod/01-namespaces/argocd
     repoURL: https://github.com/pittar-sandbox/dotnet-contoso-gitops-admins.git
     targetRevision: main
   syncPolicy:
