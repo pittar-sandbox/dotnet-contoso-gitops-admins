@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: sealed-secrets
 
+bases:
+  - ../02-rbac/openshift-gitops
+
 resources:
   - namespace.yaml
   - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
