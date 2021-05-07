@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: operator-instances
   source:
-    path: overlays/non-prod/02-operators/argocd
+    path: overlays/non-prod/03-operator-instances/argocd
     repoURL: https://github.com/pittar-sandbox/dotnet-contoso-gitops-admins.git
     targetRevision: main
   syncPolicy:
