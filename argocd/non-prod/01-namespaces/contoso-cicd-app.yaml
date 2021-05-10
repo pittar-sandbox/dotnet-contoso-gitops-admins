@@ -1,7 +1,7 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: petclinic-cicd-ns
+  name: contoso-cicd-ns
   labels:
     app: contoso
     env: cicd

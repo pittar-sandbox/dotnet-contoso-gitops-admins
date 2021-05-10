@@ -1,7 +1,7 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: petclinic-dev-ns
+  name: contoso-dev-ns
   labels:
     app: contoso
     env: dev
