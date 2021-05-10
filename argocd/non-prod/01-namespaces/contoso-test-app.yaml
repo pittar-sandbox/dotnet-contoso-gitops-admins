@@ -8,7 +8,7 @@ metadata:
     group: namespace
 spec:
   destination:
-    namespace: openshift-gitops
+    namespace: contoso-test
     server: https://kubernetes.default.svc
   project: namespaces
   source:

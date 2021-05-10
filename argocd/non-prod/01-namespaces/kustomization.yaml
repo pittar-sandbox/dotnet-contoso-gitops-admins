@@ -12,7 +12,7 @@ resources:
   # Tooling Namespaces
   - cicd-tools-app.yaml
   - sealed-secrets-app.yaml
-  # Pet Clinic Namespaces
+  # Contoso Namespaces
   - contoso-cicd-app.yaml
   - contoso-dev-app.yaml
   - contoso-test-app.yaml
