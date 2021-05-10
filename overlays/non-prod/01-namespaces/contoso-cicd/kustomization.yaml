@@ -8,5 +8,5 @@ bases:
 
 resources:
   - namespace.yaml
-#  - quay-creds-secret-sealedsecret.json
-#  - github-creds-secret-sealedsecret.json
+  - quay-creds-secret-sealedsecret.json
+  - github-creds-secret-sealedsecret.json
