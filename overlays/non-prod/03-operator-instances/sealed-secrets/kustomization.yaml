@@ -3,13 +3,6 @@ kind: Kustomization
 
 namespace: sealed-secrets
 
-resources:
-  - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
-
-patchesJson6902:
-  - target:
-      version: v1
-      group: apps
-      kind: Deployment
-      name: sealed-secrets-controller
-    path: patch-sealed-secrets.yaml
+# Remote base.  Use the configuration from the Red Hat Canada GitOps repo (unofficial).
+bases:
+  - github.com/redhat-canada-gitops/catalog/sealed-secrets-operator/base?ref=master

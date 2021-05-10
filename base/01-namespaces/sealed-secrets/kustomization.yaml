@@ -5,6 +5,7 @@ namespace: sealed-secrets
 
 resources:
   - namespace.yaml
+  - anyuid-role.yaml
   - openshift-gitops-argocd-admin-rolebinding.yaml
 
 patchesJson6902:
