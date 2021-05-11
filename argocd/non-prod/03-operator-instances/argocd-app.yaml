@@ -1,7 +1,7 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: argocd-instance
+  name: argocd-for-developers-instance
   labels:
     app: argocd
     group: operator-instances
