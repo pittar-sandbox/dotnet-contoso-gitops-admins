@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: Contoso PROD
+    openshift.io/display-name: Contoso PROD
+  name: contoso-prod

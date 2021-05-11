@@ -1,18 +1,18 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: instance-argocd
+  name: argocd-instance
   labels:
     app: argocd
     group: operator-instances
 spec:
   destination:
-    namespace: openshift-gitops
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: operator-instances
   source:
-    path: gitops/01-cluster-admin/overlays/prod/02-operators/argocd
-    repoURL: https://github.com/pittar-sandbox/openshift-gitops.git
+    path: overlays/prod/03-operator-instances/argocd
+    repoURL: https://github.com/pittar-sandbox/dotnet-contoso-gitops-admins.git
     targetRevision: main
   syncPolicy:
     automated:

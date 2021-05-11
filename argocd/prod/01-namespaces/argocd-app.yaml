@@ -1,13 +1,13 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: argocd-ns
+  name: argocd-for-developers-ns
   labels:
     app: argocd
     group: namespace
 spec:
   destination:
-    namespace: openshift-gitops
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: namespaces
   source:

@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: sealed-secrets
+
+# Remote base.  Use the configuration from the Red Hat Canada GitOps repo (unofficial).
+bases:
+  - github.com/redhat-canada-gitops/catalog/sealed-secrets-operator/base?ref=master

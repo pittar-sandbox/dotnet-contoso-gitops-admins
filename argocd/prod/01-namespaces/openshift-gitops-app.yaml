@@ -1,7 +1,7 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: namespace-openshift-gitops
+  name: openshift-gitops-ns
   labels:
     app: openshift-gitops
     group: namespace

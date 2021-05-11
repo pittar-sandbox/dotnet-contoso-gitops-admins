@@ -1,14 +1,14 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: petclinic-prod-ns
+  name: contoso-prod-ns
   labels:
     app: contoso
     env: prod
     group: namespace
 spec:
   destination:
-    namespace: openshift-gitops
+    namespace: contoso-prod
     server: https://kubernetes.default.svc
   project: namespaces
   source:
