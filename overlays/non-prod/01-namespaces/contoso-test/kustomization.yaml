@@ -5,6 +5,7 @@ namespace: contoso-test
 
 bases:
   - ../../../../base/02-rbac/openshift-gitops
+  - ../../../../base/02-rbac/contoso-cicd-pipelines
 
 resources:
   - namespace.yaml
