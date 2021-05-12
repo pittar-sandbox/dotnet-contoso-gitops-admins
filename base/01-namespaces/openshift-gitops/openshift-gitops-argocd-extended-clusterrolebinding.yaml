@@ -10,5 +10,5 @@ roleRef:
   name: openshift-gitops-argocd-extended-clusterrole
 subjects:
   - kind: ServiceAccount
-    name: openshift-gitops-argocd-application-controller
+    name: argocd-cluster-argocd-application-controller
     namespace: openshift-gitops
