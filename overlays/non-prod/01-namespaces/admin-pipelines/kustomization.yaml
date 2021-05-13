@@ -4,9 +4,17 @@ kind: Kustomization
 namespace: admin-pipelines
 
 bases:
-  - ../../../../base/02-rbac/openshift-gitops
   - tasks
   - pipelines
 
 resources:
   - namespace.yaml
+  - openshift-gitops-argocd-admin-rolebinding.yaml
+
+patchesJson6902:
+  - target:
+      group: rbac.authorization.k8s.io
+      version: v1
+      kind: RoleBinding
+      name: cluster-argocd-application-controller-admin
+    path: openshift-gitops-argocd-admin-rolebinding-patch.yaml
