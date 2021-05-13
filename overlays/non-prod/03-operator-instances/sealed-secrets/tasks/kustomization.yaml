@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - github-sealed-secret-task.yaml
+  - quay-sealed-secret-task.yaml

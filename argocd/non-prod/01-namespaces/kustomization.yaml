@@ -10,7 +10,6 @@ resources:
   - openshift-gitops-app.yaml
   - argocd-app.yaml
   # Tooling Namespaces
-  - admin-pipelines-app.yaml
   - cicd-tools-app.yaml
   - sealed-secrets-app.yaml
   # Contoso Namespaces
