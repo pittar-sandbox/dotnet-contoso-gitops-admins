@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: admin-pipelines
 
 bases:
+  - ../../../../base/02-rbac/openshift-gitops
   - tasks
   - pipelines
 
