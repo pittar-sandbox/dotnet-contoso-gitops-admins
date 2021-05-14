@@ -120,3 +120,58 @@ dotnet-contoso-gitops-admins/overlays/01-namespaces/contoso-cicd/quay-creds-secr
 Copy the JSON from the log output into this file.
 
 Finally, in the same directory where you created these new secrets, open the `kustomization.yaml` file and uncomment the two "resources" lines that reference these new files.
+
+Commmit/push the updates to your git repository, then "Sync" the `contoso-cicd-ns` Application in Argo CD to have the changes reflected immediately.
+
+### 6. Configure Developer Namesapces
+
+Now that the "Admins" have setup the cluster and created the namespaces for developers to use, it's time for the developers to do some things!
+
+First, from the root of the `dotnet-contoso-gitops-developers` repository, run the following command to configure the developer namespaces and tooling:
+
+```
+oc apply -k argocd/non-prod/01-namespaces
+```
+
+This will do all the work!  Login to the "Developer" version of Argo CD, and you'll see the following Argo CD applications in various states of synchronization:
+* cicd-tools
+* contoso-cicd
+* contoso-dev
+* contoso-test
+
+### 7. Configure Nexus as a NuGet Proxy
+
+One manual task (for now) is configuring Nexus to proxy NuGet.  To do this:
+
+1. Switch to the `cicd-tools` project.
+2. Once Nexus has finished deploying, click on the exposed Route to open the Web UI.
+3. Login with username/password of `admin`/`admin123`
+4. In the left-nav, click on "Repositories".
+5. At the top of the repositories list, click `Add -> Proxy Repository`
+6. Set the following fields, leaving the rest as default:
+    * Repository ID: `nuget-gallery`
+    * Repository Name: `NuGet Gallery`
+    * Provider: `NuGet`
+    * Remote Storage Location: `https://www.nuget.org/api/v2/`
+    * Checksum Policy: `Ignore`
+7. Click **Save**
+
+### 8. Trigger your first Pipeline Run
+
+Your pipeline is ready and the build tools are configured.  Time to run a build!
+
+From the root of the developers gitops repository, run:
+
+```
+oc create -f pipeline-run/build-and-rollout-pipeline-run.yaml -n contoso-cicd
+```
+
+**Note:** Later, we can configure GitHub webhooks to automatically trigger pipeline runs when code is pushed to a repository.
+
+In the OpenShift Developer console, change to the `contoso-cicd` project and click on "Pipelines" in the left menu.  You should see the `contoso-devops-pipeline` is running.  You can click on the pipeline run to watch the progress of the build.
+
+When it is complete, you should have:
+1. Fully functional applications in both `contoso-dev` and `contoso-test` namespace.
+2. New `contoso` container images in your Quay repository.
+3. A "Pull Request" waiting in your `dotnet-contoso-gitops-developers` repository with an update to the "prod" overlay with the new container image tag.
+
