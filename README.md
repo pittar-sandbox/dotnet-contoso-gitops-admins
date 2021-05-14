@@ -16,12 +16,11 @@ This repository has three main directories:
 To run this demo you will need:
 * The "oc" command line tool.  This can be downloaded directly from OpenShift by clicking on the **?** icon near the top-right corner of the console, selecting "Command Line Tools" and downloading the binary for your operating system.
     * It is recommended to add this cli to your *path*.
-* The "kubeseal" command line tool that is used to encrypt Secrets.  You can find it in the releases section of the [Sealed Secrets GitHub repository](https://github.com/bitnami-labs/sealed-secrets/releases/tag/v0.15.0).
-    * It is recommended to add this cli to your *path*.
+
 
 ## Getting Started
 
-Reproducing this in your own cluster is mostly automated, but since there is sensitive information that needs to be stored in a git repository (GitHub and Quay credentials), there are a few manual tasks required in order to first encrypt your secrets.
+Reproducing this in your own cluster is mostly automated, but since there is sensitive information that needs to be stored in a git repository (GitHub and Quay credentials), there are a few manual tasks required in order to first encrypt your secrets.  
 
 ### 1. Fork the Repositories
 
@@ -32,7 +31,19 @@ Fork each of the demo repositories into your own GitHub account.  These are:
 
 ### 2. Update Argo CD Applications With Your Git Repositories
 
+This part is tedious, but since you will need to update the *Applications* in the `argocd` directory of both the "admins" and "developers" repositories.  These files can be found in:
 
+```
+dotnet-contoso-gitops-admins
+|-- argocd
+```
+and
+```
+dotnet-contoso-gitops-developers
+|-- argocd
+```
+
+These files end in `-app.yaml`.  You need to replace the `repoURL` with the link to your own git repository.
 
 ### 3. Install the OpenShift GitOps Operator in Each Cluster
 
@@ -44,3 +55,11 @@ Log into your OpenShift clusters and install the "OpenShift GitOps" Operator.
 This will install the OpenShift GitOps operator, as well as a default instance of Argo CD in the `openshift-gitops` namespace.  This instance of Argo CD is meant for *cluster admins* to use to configure the cluster.
 
 ### 4. Create and Configure Namespaces with Argo CD
+
+First, log into your "non-prod" OpenShift cluster using the `oc` cli as a *cluster-admin* user.
+
+From the root of the `dotnet-contoso-gitops-admins` repository, run:
+
+```
+oc apply -k argocd/non-prod/01-namespaces
+```
