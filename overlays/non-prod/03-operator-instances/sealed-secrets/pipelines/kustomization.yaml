@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - github-new-sealed-secret-pipeline.yaml
-  - quay-new-sealed-secret-pipeline.yaml
+  - image-registry-new-sealed-secret-pipeline.yaml
