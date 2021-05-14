@@ -2,5 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - github-sealed-secret-task.yaml
+  - git-repository-sealed-secret-task.yaml
   - image-registry-sealed-secret-task.yaml
