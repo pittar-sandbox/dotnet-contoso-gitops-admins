@@ -63,3 +63,60 @@ From the root of the `dotnet-contoso-gitops-admins` repository, run:
 ```
 oc apply -k argocd/non-prod/01-namespaces
 ```
+
+Once the namespaces are configured, install an instance of Argo CD for "Developers" and an instance of "Sealed Secrets" into your cluster with:
+
+```
+oc apply -k argocd/non-prod/02-operator-instances/
+```
+
+**Note:** In OpenShift 4.6, the `argocd-for-developers-instance` will remain "OutOfSync".  This is fixed in Argo CD 2.0 / OpenShift 4.7.  For now, this is fine.  Everything will be running properly.
+
+### 5. Generate Sealed Secrets for GitHub and Quay Credentials
+
+Part of this demo pushed new container images into your Quay.io account and creates/pushes branches in your git registry.  For this, your pipeline will need access to credentials.  In your cluster, information like this is managed by Kubernetes "Secrets".  However, it is a bad idea to put a standard "Secret" in a Git repository, since the data is only base64 encoded.  How do you manage Secrets in a GitOps world, then?  One option is to use Bitnami Sealed Secrets.
+
+In the previous step Sealed Secrets was installed into a new namespace called `sealed-secrets`.  Two helper pipelines have also been created in that namespace to make generated "sealed secrets" for your credentials easier.
+
+1. From the Developer Console, go to the "sealed-secrets" project and click on "Pipelines" in the left menu.
+2. Click on the "generate-git-repository-sealed-secret" Pipeline, then from the drop-down near the top-left of the screen select "Start".
+3. Fill in the fom with the following values:
+    * Keep the default value for SEALED_SECRETS_NAMESPACE
+    * SECRET_NAME: `github-creds-secret`
+    * SECRET_NAMESPACE: `contoso-cicd`
+    * GIT_HOST - keep default
+    * GIT_USERNAME: your github username
+    * GIT_EMAIL: your github account email address
+    * GIT_PASSWORD: If using GitHub, create an access token and use this instead of your password.
+4. Click "Start"
+
+If you watch the logs, you will see a multi-line JSON object printed at the end of the pipeline.  This is your encrypted git credentials secret!
+
+Create a new file in your gitops admin repo for this file:
+```
+dotnet-contoso-gitops-admins/overlays/01-namespaces/contoso-cicd/github-creds-secret-sealedsecret.json
+```
+Copy the JSON from the log output into this file.
+
+Similarly, we will create an encrypted Quay secret:
+1. From the Developer Console, go to the "sealed-secrets" project and click on "Pipelines" in the left menu.
+2. Click on the "generate-image-registry-sealed-secret" Pipeline, then from the drop-down near the top-left of the screen select "Start".
+3. Fill in the fom with the following values:
+    * Keep the default value for SEALED_SECRETS_NAMESPACE
+    * SECRET_NAME: `quay-creds-secret`
+    * SECRET_NAMESPACE: `contoso-cicd`
+    * REGISTRY_HOST - keep default
+    * REGISTRY_USERNAME: Your quay.io username
+    * REGISTRY_EMAIL: Your quay.io account email address
+    * REGISTRY_PASSWORD: Your quay.io password.
+4. Click "Start"
+
+If you watch the logs, you will see a multi-line JSON object printed at the end of the pipeline.  This is your encrypted quay.io credentials secret!
+
+Create a new file in your gitops admin repo for this file:
+```
+dotnet-contoso-gitops-admins/overlays/01-namespaces/contoso-cicd/quay-creds-secret-sealedsecret.json
+```
+Copy the JSON from the log output into this file.
+
+Finally, in the same directory where you created these new secrets, open the `kustomization.yaml` file and uncomment the two "resources" lines that reference these new files.
