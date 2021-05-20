@@ -13,7 +13,7 @@ spec:
   source:
     path: overlays/non-prod/01-namespaces/argocd
     repoURL: https://github.com/pittar-sandbox/dotnet-contoso-gitops-admins.git
-    targetRevision: main
+    targetRevision: 4.7
   syncPolicy:
     automated:
       prune: false

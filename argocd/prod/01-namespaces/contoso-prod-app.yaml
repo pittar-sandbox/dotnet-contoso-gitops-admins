@@ -14,7 +14,7 @@ spec:
   source:
     path: overlays/prod/01-namespaces/contoso-prod
     repoURL: https://github.com/pittar-sandbox/dotnet-contoso-gitops-admins.git
-    targetRevision: main
+    targetRevision: 4.7
   syncPolicy:
     automated:
       prune: false
