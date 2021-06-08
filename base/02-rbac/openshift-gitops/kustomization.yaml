@@ -3,5 +3,5 @@ kind: Kustomization
 
 resources:
   - 01-argocd-developer-admin-rolebinding.yaml
-  - argocd-extended-clusterrole.yaml
-  - argocd-extended-clusterrolebinding.yaml
+#  - argocd-extended-clusterrole.yaml
+#  - argocd-extended-clusterrolebinding.yaml
