@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+  name: argocd-extended-clusterrole
+rules:
+  - apiGroups:
+    - monitoring.coreos.com
+    resources:
+      - probes
+    verbs:
+      - 'list'
