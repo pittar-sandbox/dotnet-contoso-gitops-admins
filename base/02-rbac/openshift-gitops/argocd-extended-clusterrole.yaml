@@ -11,3 +11,13 @@ rules:
       - probes
     verbs:
       - 'list'
+      - 'watch'
+      - 'get'
+  - apiGroups:
+    - ""
+    resources:
+      - podtemplates
+    verbs:
+      - 'list'
+      - 'watch'
+      - 'get'
